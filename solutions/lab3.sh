@@ -22,6 +22,14 @@ if [ -z $INPUTFILE ] ; then
         exit 0
 fi
 
+# Walidacja użytkownika
+if [ $UID != 0 ] ; then
+	echo 
+	echo "Skrypt musi być wykonany jako root"
+        echo
+        exit 0 
+fi
+
 LINIA=0
 IP=$(ip a | grep inet | grep ens | awk '{print $2}')
 echo "Tworzę użytkowników:"
