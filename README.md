@@ -1,1 +1,1 @@
-# bash_awk
+# Linux - Programowanie powłoki w Bash i AWK
