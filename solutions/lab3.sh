@@ -25,7 +25,7 @@ fi
 # Walidacja użytkownika
 if [ $UID != 0 ] ; then
 	echo 
-	echo "Skrypt musi być wykonany jako root"
+	echo "Skrypt musi być wykonany jako root."
         echo
         exit 0 
 fi
