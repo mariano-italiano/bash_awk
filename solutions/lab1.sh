@@ -13,5 +13,5 @@ else
         echo
         echo "Usage: $0 <imie>"
         echo
-        exit 0
+        exit 1
 fi
