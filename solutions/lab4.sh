@@ -1,68 +1,56 @@
 #!/bin/bash
 # Data: 01.01.2024
 # Autor: Marcin Kujawski
-# Opis: Skrypt monitorujący liczbe użytkowników na systemie
-# Użycie: ./lab4.sh -f <logfile>
-#
+# Opis: Prosty kalkulator arytmetyczny
+# Użycie: ./lab2.sh
 
-# Wczytanie argumentu skryptu
-while getopts "f:s:d:" flaga
-  do
-    case "${flaga}" in
-      f) LOGFILE=${OPTARG};;
-    esac
-  done
+# Pobranie czasu wystartowania skryptu
+start=`date +%s.%N`
 
-if [ -z $LOGFILE ] ; then
-        echo "Użycie skryptu:"
-        echo " ./lab4.sh -f <logfile>"
-        echo
-        exit 0
-fi
+# Wczytanie liczb
+read -p "Podaj pierwszą liczbę: " a
+read -p "Podaj drugą liczbę: " b
+read -p "Podaj operację [+, -, /, *]: " operacja
 
-# Przychwycenie SIGINT
-CTRLC=0
-KILL=0
+if [ -z $a ] || [ -z $b ] ; then
+	echo "Jedna z liczb nie została podana"
+else
 
-function przechwyc_SIGINT {
-        CTRLC=$(( $CTRLC + 1 ))
-        if [[ $CTRLC > 0 ]] ; then
-                echo "`date +'%m-%d-%Y %H:%M:%S'` - INFO - Przechwycony sygnał SIGINT" >> /tmp/$LOGFILE
-        fi
-}
-
-# Przechwycenie SIGKILL 
-function przechwyc_SIGTERM {
-        KILL=$(( $KILL + 1 ))
-        if [[ $KILL > 0 ]] ; then
-                echo "`date +'%m-%d-%Y %H:%M:%S'` - INFO - Przechwycony sygnał SIGKILL" >> /tmp/$LOGFILE
-        fi
-}
-
-# Przechwycenie sygnałów
-trap przechwyc_SIGINT SIGINT
-trap przechwyc_SIGTERM SIGTERM
-
-# Clean log file
-rm -f /tmp/$LOGFILE
-touch /tmp/$LOGFILE
-
-# Sprawdzanie użytkowników
-while true
-do
+	# Wykonanie operacji arytmetycznej i wyświetlenie wyniku
+	echo -n "WYNIK: "
+	case $operacja in
+	        "+") op_start=`date +%s.%N`
+		     echo "scale=2; $a+$b" | bc
+		     op_end=`date +%s.%N` ;;
+	        "-") op_start=`date +%s.%N`
+		     echo "scale=2; $a-$b" | bc 
+		     op_end=`date +%s.%N` ;;
+	        "/") if [ $b -gt 0 ] ; then
+			     op_start=`date +%s.%N`
+			     echo "scale=2; $a/$b" | bc 
+			     op_end=`date +%s.%N` 
+		     else
+		     	     echo "Nie dzielimy przez 0!"
+		             exit 1
+		     fi
+		     ;;
+	        "*") op_start=`date +%s.%N`
+		     echo "scale=2; $a*$b" | bc 
+		     op_end=`date +%s.%N` ;;
 	
-	ALL_USERS=`who | wc -l`
-	ROOT=`who | grep -i root | wc -l`
-
-	if [[ $ALL_USERS > 0 ]] ; then
-		echo "`date +'%m-%d-%Y %H:%M:%S'` - INFO - Liczba zalogowanych użytkwników na systemie: $ALL_USERS" >> /tmp/$LOGFILE
-	fi
-
-	if [[ $ROOT > 0 ]] ; then
-		echo "`date +'%m-%d-%Y %H:%M:%S'` - WARN - Użytkownik root jest zalogowany" >> /tmp/$LOGFILE
-	fi
-	sleep 60
-
-done
-
+	        *)      echo "Wybrałeś niedozwolony znak operacji!" 
+			exit 1;;
+	esac
+	
+	# Pobranie czasu zakończenia skryptu
+	koniec=`date +%s.%N`
+	echo
+	
+	# Obliczenie długości trwania i wyświetlenie wartości na zółto
+	czasWykonania=$( echo "$koniec - $start" | bc -l )
+	czasObliczen=$( echo "$op_end - $op_start" | bc -l )
+	echo -e "Czas wykonania programu:\033[33m $czasWykonania \033[0msekund"
+	echo -e "Czas wykonania obliczeń:\033[33m $czasObliczen \033[0msekund"
+	echo
+fi
 exit 0
