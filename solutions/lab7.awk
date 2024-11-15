@@ -1,4 +1,10 @@
 #!/usr/bin/awk -f
+# Data: 01.01.2024
+# Autor: Marcin Kujawski
+# Opis: Skrypt analizujący plik win
+# Użycie: ./lab7.awk -f <input-file>
+#         awk -f lab7.awk -f <input-file>
+#
 
 # Funkcja na znajdywanie ceny maksymalnej
 function cenaMax(cena1, cena2){
