@@ -2,7 +2,7 @@
 # Data: 01.01.2024
 # Autor: Marcin Kujawski
 # Opis: Skrypt tworzący wielu użytkowników z pliku
-# Użycie: ./lab5.sh -f <input-file>
+# Użycie: ./lab7.sh -f <input-file>
 #
 
 # Wczytanie parametrów 
