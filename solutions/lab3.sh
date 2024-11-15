@@ -2,7 +2,7 @@
 # Data: 01.01.2024
 # Autor: Marcin Kujawski
 # Opis: Skrypt który zbiera informacje na temat wersji jądra systemu
-# Użycie: ./lab1.sh -s <serwer IP>
+# Użycie: ./lab3.sh -s <serwer IP>
 
 # Pobranie IP serwera z parametrów skryptu
 while getopts "s:" flag
