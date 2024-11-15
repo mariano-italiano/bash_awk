@@ -2,7 +2,7 @@
 # Data: 01.01.2024
 # Autor: Marcin Kujawski
 # Opis: Prosty kalkulator arytmetyczny
-# Użycie: ./lab4.sh
+# Użycie: ./lab5.sh
 
 # Pobranie czasu wystartowania skryptu
 start=`date +%s.%N`
