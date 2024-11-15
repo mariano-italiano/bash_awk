@@ -2,7 +2,7 @@
 # Data: 01.01.2024
 # Autor: Marcin Kujawski
 # Opis: Skrypt monitorujący liczbe użytkowników na systemie
-# Użycie: ./lab6.sh -f <logfile>
+# Użycie: ./lab8.sh -f <logfile>
 #
 
 # Wczytanie argumentu skryptu
