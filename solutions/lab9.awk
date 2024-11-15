@@ -2,7 +2,7 @@
 # Data: 01.01.2024
 # Autor: Marcin Kujawski
 # Opis: Skrypt analizujący plik win
-# Użycie: ./lab7.awk -f <input-file>
+# Użycie: ./lab9.awk -f <input-file>
 #         awk -f lab7.awk -f <input-file>
 #
 
