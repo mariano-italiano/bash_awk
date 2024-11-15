@@ -3,7 +3,7 @@
 # Autor: Marcin Kujawski
 # Opis: Skrypt analizujący plik win
 # Użycie: ./lab9.awk -f <input-file>
-#         awk -f lab7.awk -f <input-file>
+#         awk -f lab9.awk -f <input-file>
 #
 
 # Funkcja na znajdywanie ceny maksymalnej
